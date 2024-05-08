@@ -18,7 +18,22 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-TODO: Write usage instructions here
+### Building CRT
+
+TODO:  This obviously needs a nice cmakelist.txt that builds everything together and supports install. But for now, this works.
+
+
+```
+cd crt/aws-c-common-build
+cmake ../aws-c-common -DCMAKE_INSTALL_PREFIX=../install
+make -j 12
+make install
+```
+
+Building:
+```
+rake build
+```
 
 ## Development
 

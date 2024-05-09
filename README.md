@@ -35,6 +35,57 @@ Building:
 rake build
 ```
 
+Testing:
+```
+bin/console
+```
+
+```ruby
+encoder = Awscrt::CborEncoder.new
+encoder.add_string("test")
+d = encoder.encoded_data
+Aws::Cbor::CborEngine.decode(d)
+```
+
+
+```ruby
+encoder = Awscrt::CborEncoder.new
+encoder.start_array(3)
+encoder.add_string("test")
+encoder.add_string("value2")
+encoder.add_float(1.123)
+d = encoder.encoded_data
+Aws::Cbor::CborEngine.decode(d)
+
+
+encoder = Awscrt::CborEncoder.new
+encoder.start_map(2)
+encoder.add_string("k1")
+encoder.add_pos_int(1)
+encoder.add_string("k2")
+encoder.add_neg_int(1)
+d = encoder.encoded_data
+Aws::Cbor::CborEngine.decode(d)
+
+d = Awscrt.cbor_encode({a: 1, b: -10})
+Aws::Cbor::CborEngine.decode(d)
+
+encoder = Awscrt::CborEncoder.new
+encoder.crt_auto_add({a: 1, b: 2})
+d = encoder.encoded_data
+Aws::Cbor::CborEngine.decode(d)
+
+```
+
+Maybe useful for memory debugging: https://github.com/Shopify/ruby_memcheck
+
+## Resources
+* https://docs.ruby-lang.org/en/master/extension_rdoc.html - general extesion reference
+* https://silverhammermba.github.io/emberb/c/ - a good overview of the ruby c API
+* https://github.com/ruby/ruby/blob/master/include/ruby/ruby.h  - all of the VM and metaprogramming functions
+* https://github.com/ruby/ruby/blob/master/include/ruby/intern.h - all of the functions for interacting with Ruby’s built in classes.
+* https://github.com/cabo/cbor-ruby/blob/master/ext/cbor/packer.c#L132 - cbor gem's auto add function
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

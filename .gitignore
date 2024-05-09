@@ -14,3 +14,12 @@ mkmf.log
 
 # rspec failure tracking
 .rspec_status
+
+Gemfile.lock
+.idea
+crt/aws-c-common-build/
+crt/Makefile
+crt/CMakeFiles/
+crt/CMakeCache.txt
+crt/cmake_install.cmake
+crt/install
